@@ -12,7 +12,7 @@ export const contactsReducer = (state = DEFAULT_STATE, action = {
         case SUCCESS_CONTACTS_LIST:
             // Update contacts list data and set loading state to false on success
             const newContactsListData = action.data;
-            const {contactsListData} = state;
+            const { contactsListData } = state;
 
             // If contactsListData already exists and the state length is less than the API total,
             // append new data to it and update the total
@@ -21,14 +21,23 @@ export const contactsReducer = (state = DEFAULT_STATE, action = {
                 contactsListData.contacts_ids &&
                 contactsListData.contacts_ids.length < newContactsListData.total
             ) {
+                const updatedContactsIds = [...contactsListData.contacts_ids, ...newContactsListData.contacts_ids];
+                const updatedContacts = {
+                    ...contactsListData.contacts,
+                    ...newContactsListData.contacts,
+                };
+
                 const updatedContactsListData = {
                     ...contactsListData,
-                    ...newContactsListData,
+                    contacts_ids: updatedContactsIds,
+                    contacts: updatedContacts,
                 };
+
                 return { ...state, contactsListData: updatedContactsListData, loading: false };
             } else {
                 return { ...state, contactsListData: newContactsListData || {}, loading: false };
             }
+
         case ERROR_CONTACTS_LIST:
             // Handle error in contacts list fetch and set loading state to false
             return { ...state, contactsListData: action.data, loading: false };

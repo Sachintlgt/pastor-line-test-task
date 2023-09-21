@@ -28,7 +28,7 @@ const ViewModal = ({ show, data, handleClose }) => {
                                     </div>
                                     <div className='col-sm-6 mb-2'>
                                         <label>Email</label>
-                                        <h5>{data.email || "N/A"}</h5>
+                                        <h5>{data.email || ""}</h5>
                                     </div>
                                     <div className='col-sm-6 mb-2'>
                                         <label>Phone Number</label>

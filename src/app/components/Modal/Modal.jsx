@@ -30,7 +30,7 @@ const Modal = ({
                             <div className='d-flex align-items-center justify-content-center mb-3'>
                                 <Link to={pathname === ALL_CONTACTS ? "#" : ALL_CONTACTS} className="btn btn-primary-a">All Contacts</Link>
                                 <Link to={pathname === US_CONTACTS ? "#" : US_CONTACTS} className="btn btn-primary-b mx-2">US Contacts</Link>
-                                <button type="button" className="btn btn-primary-a" onClick={handleClose}>Close</button>
+                                <button type="button" className="btn btn-outline-primary-a" onClick={handleClose}>Close</button>
                             </div>
                             {/* Search input */}
                             <div className='search-input mb-3 d-flex'>
@@ -41,6 +41,7 @@ const Modal = ({
                                 <table className="table">
                                     <thead>
                                         <tr>
+                                            <th className="mw-150">Sno.</th>
                                             <th className="mw-150">Id</th>
                                             <th className="mw-150">First Name</th>
                                             <th className="mw-150">Last Name</th>
@@ -53,13 +54,14 @@ const Modal = ({
                                         {!loading ? (
                                             data && data.length > 0 ? (<tr>
                                                 <td colSpan={12} className="p-0">
-                                                    <Scrollbars style={{ height: 70 }} onScroll={(e) => handleScroll(e)}>
+                                                    <Scrollbars style={{ height: 500 }} onScroll={(e) => handleScroll(e)}>
                                                         {
                                                             data.map((contactId, index) => {
                                                                 return (
                                                                     <table className="w-100 cursor-pointer" key={index} onClick={() => handleViewModal(contactId)}>
                                                                         <tbody>
                                                                             <tr>
+                                                                                <td className="mw-150">{index + 1}</td>
                                                                                 <td className="mw-150">#{contactId}</td>
                                                                                 <td className="mw-150">{contactsListData.contacts[contactId].first_name}</td>
                                                                                 <td className="mw-150">{contactsListData.contacts[contactId].last_name}</td>
@@ -77,13 +79,13 @@ const Modal = ({
                                             </tr>) : (
                                                 // Displayed when no data is found
                                                 <tr>
-                                                    <td className="text-center" colSpan={6}>No Data Found!</td>
+                                                    <td className="text-center" colSpan={8}>No Data Found!</td>
                                                 </tr>
                                             )
                                         ) : (
                                             // Displayed when data is loading
                                             <tr>
-                                                <td className="text-center" colSpan={6}>
+                                                <td className="text-center" colSpan={8}>
                                                     <Loader />
                                                 </td>
                                             </tr>
